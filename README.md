@@ -196,7 +196,7 @@ Modify `app/globals.css` to customize the color palette:
 
 ### Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/HamzaBraik01/Portfolio)
 
 1. Push your code to GitHub
 2. Import repository on [Vercel](https://vercel.com)
@@ -233,7 +233,7 @@ Built with performance in mind:
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/your-username/portfolio/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/HamzaBraik01/Portfolio/issues).
 
 <br/>
 
@@ -250,13 +250,13 @@ This project is open source and available under the [MIT License](LICENSE).
 </p>
 
 <p align="center">
-  <a href="https://github.com/your-username">
+  <a href="https://github.com/HamzaBraik01">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
   </a>
-  <a href="https://linkedin.com/in/your-profile">
+  <a href="https://www.linkedin.com/in/hamza-braik-a221b326a/">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
   </a>
-  <a href="mailto:your-email@example.com">
+  <a href="mailto:hamzabraik02@gmail.com">
     <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
   </a>
 </p>

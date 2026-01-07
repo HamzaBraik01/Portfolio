@@ -10,10 +10,10 @@ const projects = [
     category: "Full Stack Development",
     description: "Software solution for optimization and intelligent tracking of logistics deliveries. Features modular architecture for route management, real-time order tracking, and automated driver assignment.",
     tags: ["Java", "Spring Boot", "PostgreSQL", "Swagger", "JUnit", "Mockito"],
-    images: [],
+    image: "/smartlogi-sdms.png",
     gradient: "from-purple-500 to-purple-600",
     glowColor: "purple",
-    github: "https://github.com/HamzaBraik01",
+    github: "https://github.com/HamzaBraik01/smartlogi-sdms",
   },
 
   {
@@ -23,8 +23,8 @@ const projects = [
     tags: ["PHP", "Laravel", "MySQL", "JavaScript", "Tailwind CSS"],
     gradient: "from-pink-500 to-pink-600",
     glowColor: "pink",
-    images: [],
-    github: "https://github.com/HamzaBraik01",
+    image: "/OctoPOS.png",
+    github: "https://github.com/HamzaBraik01/OctoPOS",
   },
 
   {
@@ -34,8 +34,8 @@ const projects = [
     tags: ["Python", "Flask", "Vue.js", "Machine Learning", "SQL"],
     gradient: "from-teal-500 to-teal-600",
     glowColor: "teal",
-    images: [],
-    github: "https://github.com/HamzaBraik01",
+    image: "/FroidPredict-Maintenance-Predictive-et-Analyse-Thermodynamique-des-Installations-Frigorifiques.png",
+    github: "https://github.com/HamzaBraik01/FroidPredict-Maintenance-Predictive-et-Analyse-Thermodynamique-des-Installations-Frigorifiques",
   },
 ];
 
@@ -144,9 +144,20 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         hover:shadow-2xl hover:border-purple-300 dark:hover:border-purple-500/30
         transition-all duration-500`}
       >
-        {/* Gradient Header */}
+        {/* Image Header */}
         <div className="relative h-36 md:h-48 overflow-hidden">
-          <div className={`w-full h-full bg-gradient-to-br ${project.gradient}`} />
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${project.gradient}`} />
+          )}
+
+          {/* Overlay Gradient */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent`} />
 
           {/* Animated Lines */}
           <div className="absolute inset-0 overflow-hidden">
@@ -167,18 +178,6 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 style={{ top: `${20 + i * 15}%`, width: '50%' }}
               />
             ))}
-          </div>
-
-          {/* Project Number */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-bold text-white/20 select-none"
-            >
-              0{index + 1}
-            </motion.div>
           </div>
 
           {/* GitHub Link */}

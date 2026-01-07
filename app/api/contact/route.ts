@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     });
 
     // Configuration des paramètres d'email
-    const to = process.env.CONTACT_TO || "ziyadouamna.service@gmail.com";
+    const to = process.env.CONTACT_TO || "hamzabraik02@gmail.com";
     const from = process.env.CONTACT_FROM || process.env.SMTP_USER || "no-reply@example.com";
 
     // Envoi de l'email

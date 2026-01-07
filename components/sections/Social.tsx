@@ -1,14 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin, Github, Twitter, Instagram, Mail, Sparkles } from "lucide-react";
+import { Linkedin, Github, Mail, Sparkles } from "lucide-react";
 
 export default function Social() {
   const socialLinks = [
     { icon: Github, href: "https://github.com/HamzaBraik01", label: "GitHub", color: "purple" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/hamza-braik", label: "LinkedIn", color: "blue" },
-    { icon: Twitter, href: "https://twitter.com/HamzaBraik01", label: "Twitter", color: "cyan" },
-    { icon: Instagram, href: "https://instagram.com/hamza_braik", label: "Instagram", color: "pink" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/hamza-braik-a221b326a/", label: "LinkedIn", color: "blue" },
     { icon: Mail, href: "mailto:hamzabraik02@gmail.com", label: "Email", color: "teal" },
   ];
 
