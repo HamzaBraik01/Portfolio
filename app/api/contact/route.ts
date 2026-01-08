@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// Définition des types d'entrée pour mieux gérer la validation
 interface ContactForm {
   name: string;
   email: string;
@@ -11,7 +10,6 @@ interface ContactForm {
 
 export async function POST(req: Request) {
   try {
-    // Récupération des données du formulaire
     const { name, email, subject, message }: ContactForm = await req.json();
 
     // Validation des champs
@@ -19,52 +17,51 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // Récupération de la configuration SMTP
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = Number(process.env.SMTP_PORT || 587);
-    const smtpSecure = process.env.SMTP_SECURE === "true";
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
-
-    // Vérification de la configuration SMTP
-    const hasSmtpConfig = Boolean(smtpHost && smtpUser && smtpPass);
-
-    if (!hasSmtpConfig) {
+    // Vérification de la clé API Resend
+    const resendApiKey = process.env.RESEND_API_KEY;
+    if (!resendApiKey) {
       return NextResponse.json(
         {
           error: "EMAIL_NOT_CONFIGURED",
-          message:
-            "Email service is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS in your environment.",
+          message: "Resend API key is not configured. Please set RESEND_API_KEY in your environment.",
         },
         { status: 503 }
       );
     }
 
-    // Création du transporteur nodemailer
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: smtpSecure,
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
+    // Initialisation de Resend
+    const resend = new Resend(resendApiKey);
 
-    // Configuration des paramètres d'email
+    // Email destinataire
     const to = process.env.CONTACT_TO || "hamzabraik02@gmail.com";
-    const from = process.env.CONTACT_FROM || process.env.SMTP_USER || "no-reply@example.com";
 
-    // Envoi de l'email
-    await transporter.sendMail({
-      from,
-      to,
-      subject: `New contact form: ${subject}`,
+    // Envoi de l'email avec Resend
+    const { error } = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: [to],
+      subject: `[Portfolio] ${subject}`,
       replyTo: email,
-      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #6366f1;">New Contact Form Submission</h2>
+          <hr style="border: 1px solid #e5e7eb;" />
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+          <hr style="border: 1px solid #e5e7eb;" />
+          <h3 style="color: #374151;">Message:</h3>
+          <p style="background: #f9fafb; padding: 15px; border-radius: 8px;">${message.replace(/\n/g, '<br>')}</p>
+          <hr style="border: 1px solid #e5e7eb;" />
+          <p style="color: #6b7280; font-size: 12px;">This email was sent from your portfolio contact form.</p>
+        </div>
+      `,
     });
 
-    // Retour de la réponse au client
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: "SEND_FAILED", message: error.message }, { status: 500 });
+    }
+
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
     console.error("Contact form send error", error);
