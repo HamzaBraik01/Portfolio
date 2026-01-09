@@ -43,7 +43,7 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/HamzaBraik01", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/hamza-braik", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/hamza-braik-a221b326a/", label: "LinkedIn" },
     { icon: Mail, href: "mailto:hamzabraik02@gmail.com", label: "Email" },
   ];
 
